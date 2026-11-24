@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MP4 → GIF</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>MP4 <span>→</span> GIF</h1>
+  <p>Runs entirely in your browser. Nothing is uploaded.</p>
+</header>
+
+<main>
+  <section id="drop" class="drop" tabindex="0">
+    <input id="file" type="file" accept="video/mp4,video/*" hidden>
+    <div class="drop-inner">
+      <div class="icon">🎞️</div>
+      <strong>Drop an MP4 here</strong>
+      <span>or click to browse</span>
+    </div>
+  </section>
+
+  <div id="editor" hidden>
+    <div class="top">
+      <div class="card player">
+        <div class="stage">
+          <video id="video" playsinline muted></video>
+          <div id="detect" hidden><div class="spin"></div><span>Detecting frame rate…</span></div>
+        </div>
+        <div class="controls">
+          <button id="prev" class="ghost" title="Previous frame (←)">⏮</button>
+          <button id="play" class="ghost" title="Space">▶</button>
+          <button id="next" class="ghost" title="Next frame (→)">⏭</button>
+          <span id="time">0:00.0 / 0:00.0</span>
+          <span class="sp"></span>
+          <button id="setStart" class="ghost" title="I">Set start [</button>
+          <button id="setEnd" class="ghost" title="O">Set end ]</button>
+        </div>
+        <div id="timeline">
+          <div class="track"></div>
+          <div id="sel"><span id="h1" class="handle"></span><span id="h2" class="handle"></span></div>
+          <div id="playhead"></div>
+        </div>
+        <div class="rangeinfo">
+          Range <b id="rs">0:00.0</b> → <b id="re">0:00.0</b> · <b id="rd">0.0s</b> · <b id="rf">0</b> frames
+          <button id="reset" class="ghost">Reset</button>
+          <button id="new" class="ghost">New video</button>
+        </div>
+      </div>
+
+      <div class="card settings">
+        <h2>Export</h2>
+        <label>Frame rate <b id="fpsv">10</b> fps
+          <input id="fps" type="range" min="1" max="60" value="10"></label>
+        <label>Width <b id="wv">480</b> px
+          <input id="width" type="range" min="120" max="1280" step="20" value="480"></label>
+        <label>Quality <b id="qv">10</b> <small>(1 best · 30 smallest)</small>
+          <input id="quality" type="range" min="1" max="30" value="10"></label>
+        <label class="check"><input id="loop" type="checkbox" checked> Loop forever</label>
+        <button id="export" class="primary">Export GIF</button>
+        <div id="progress" hidden><div id="bar"></div></div>
+        <div id="result" hidden>
+          <img id="out" alt="Result GIF">
+          <a id="dl" class="primary" download="output.gif">Download <span id="size"></span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<div id="loading" hidden><div class="spin"></div><span id="loadmsg">Loading…</span></div>
+
+<script src="vendor/gif.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
