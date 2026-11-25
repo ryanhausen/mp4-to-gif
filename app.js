@@ -43,6 +43,7 @@ $('new').onclick = () => { video.pause(); $('editor').hidden = true; drop.hidden
 
 async function load(f) {
   if (!f.type.startsWith('video/')) return alert('Please choose a video file.');
+  $('dl').download = f.name.replace(/\.[^.]+$/, '') + '.gif';
   loading('Reading video…');
   if (url) URL.revokeObjectURL(url);
   url = URL.createObjectURL(f);
